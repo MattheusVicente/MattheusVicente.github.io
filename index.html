@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- three.js library -->
 <script src='js/three.js'></script>
+<script src='js/html2canvas.min.js'></script>
 <!-- ar.js -->
 <script src="js/ar.min.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = '../'</script>
@@ -10,7 +11,9 @@
 	<a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - three.js camera transform
 	<br/>
 	Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
-	<canvas width='640' height='480' id='doubleImage'></canvas>
+	<div id="capture" style="padding: 10px; background: #f5da55">
+    		<h4 style="color: #000; ">Hello world!</h4>
+	</div>
 </div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
