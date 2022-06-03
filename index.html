@@ -143,7 +143,7 @@
             <form action="./" method="get">
               <p>
                 bang
-                <input type="radio" name="foo" value="off">
+                <input type="radio" name="foo" value="off" id="capture">
               </p>
               <p>
                 whimper
@@ -173,8 +173,8 @@
     </p>
     <script type="text/javascript" src="js/html2canvas.js"></script>
     <script type="text/javascript">
-        html2canvas(document.body).then(function(canvas) {
-            document.body.appendChild(canvas);
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+            document.body.appendChild(canvas)
         });
     </script>
   </body>
