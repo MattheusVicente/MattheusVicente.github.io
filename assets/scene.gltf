@@ -122,10 +122,10 @@
   ],
   "images": [
     {
-      "uri": "textures/defaultMat_baseColor.jpeg"
+      "uri": "defaultMat_baseColor.jpeg"
     },
     {
-      "uri": "textures/defaultMat_normal.jpeg"
+      "uri": "defaultMat_normal.jpeg"
     }
   ],
   "materials": [
