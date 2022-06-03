@@ -127,7 +127,7 @@
     </style>
   </head>
   <body>
-    <div id="capture" style="padding: 10px; background: #f5da55">
+    <div id="capture" style="padding: 10px; background: #f5da55" onclick="foto()">
       <h4 style="color: #000; ">Hello world!</h4>
     </div>
     <dl>
@@ -176,9 +176,11 @@
     </p>
     <script type="text/javascript" src="js/html2canvas.js"></script>
     <script type="text/javascript">
+      function foto() {
         html2canvas(document.querySelector("#capture")).then(canvas => {
             document.body.appendChild(canvas)
         });
+      }
     </script>
   </body>
 </html>
