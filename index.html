@@ -17,7 +17,6 @@
             id="scene"
             embedded
             gesture-detector
-            onclick="foto()"
         >
             <a-assets>
                 <a-asset-item
@@ -43,21 +42,18 @@
                     gltf-model="#animated-asset"
                     class="clickable"
                     gesture-handler
+                    onclick="foto()"
                 ></a-entity>
             </a-marker>
 
             <a-entity camera></a-entity>
         </a-scene>
-        <div id="capture">
-            
-        </div>
         <script type="text/javascript" src="js/html2canvas.js"></script>
         <script type="text/javascript">
-            function foto() {  
+            function foto() {
                 document.getElementById("scene").setAttribute('visible', 'false')
-                document.getElementById("capture").setAttribute('visible', 'true')
-                html2canvas(document.querySelector("#capture")).then(canvas => {
-                document.querySelector("#capture").appendChild(canvas)
+                html2canvas(document.body).then(canvas => {
+                document.body.appendChild(canvas)
                 });
             }
     </script>
