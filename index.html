@@ -48,12 +48,9 @@
 
             <a-entity camera></a-entity>
         </a-scene>
-        <script type="text/javascript" src="js/html2canvas.js"></script>
         <script type="text/javascript">
             function foto() {
-                html2canvas(document.body).then(canvas => {
-                document.body.appendChild(canvas)
-                });
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
             }
     </script>
     </body>
