@@ -51,10 +51,10 @@
         <script type="text/javascript" src="js/html2canvas.js"></script>
         <script type="text/javascript">
             function foto() {
-                document.getElementById("scene").setAttribute('visible', 'false')
                 html2canvas(document.body).then(canvas => {
                 document.body.appendChild(canvas)
                 });
+                document.getElementById("scene").setAttribute('visible', 'false')
             }
     </script>
     </body>
