@@ -11,7 +11,6 @@
 
 	<style>
 	    .button1 {
-		position:absolute;
 	        display:block;
 	        left:-60px;
 	        margin-top:35px;
@@ -69,7 +68,6 @@
 	    var counter = 0;
 
 	    let shareData;
-	    document.addEventListener('pointerup', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
@@ -122,8 +120,7 @@
 		    console.error(e);
 		});
 		++counter;
-	    });
-	}
+	};
 	</script>
     </body>
 </html>
