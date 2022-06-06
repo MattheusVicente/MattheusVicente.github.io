@@ -4,7 +4,6 @@
         <meta charset="utf-8">
 	<script src="js/html2canvas.js"></script>
 	<script src="js/aframe-master.min.js"></script>
-        <script src="js/aframe-ar.js"></script>
         <script src="js/aframe-extras.loaders.min.js"></script>
         <script src="js/gesture-detector.js"></script>
         <script src="js/gesture-handler.js"></script>
@@ -56,7 +55,7 @@
 	    var counter = 0;
 
 	    let shareData;
-	    document.addEventListener('click', (event) => {
+	    document.addEventListener('pointerup', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
