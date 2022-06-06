@@ -31,27 +31,25 @@
                     src="assets/scene.gltf"></a-asset-item>
             </a-assets>
 
-	    <a-anchor hit-testing-enabled='true'>
-		    <a-marker
-			id="animated-marker"
-			type="pattern"
-			preset="custom"
-			url="assets/marker.patt"
-			raycaster="objects: .clickable"
-			emitevents="true"
-			cursor="fuse: false; rayOrigin: mouse;"
-			id="markerA">
+	    <a-marker
+		id="animated-marker"
+		type="pattern"
+		preset="custom"
+		url="assets/marker.patt"
+		raycaster="objects: .clickable"
+		emitevents="true"
+		cursor="fuse: false; rayOrigin: mouse;"
+		id="markerA">
 
-			<a-entity
-			    id="bowser-model"
-			    scale="0.5 0.5 0.5"
-			    rotation="210 0 0"
-			    gltf-model="#animated-asset"
-			    class="clickable"
-			    gesture-handler></a-entity>
+		<a-entity
+		    id="bowser-model"
+		    scale="0.5 0.5 0.5"
+		    rotation="210 0 0"
+		    gltf-model="#animated-asset"
+		    class="clickable"
+		    gesture-handler></a-entity>
 
-		    </a-marker>
-	    </a-anchor>
+	    </a-marker>
 
             <a-camera-static/>
         </a-scene>
