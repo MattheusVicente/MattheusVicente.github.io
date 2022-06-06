@@ -48,12 +48,12 @@
 	    </a-marker>
 
 	    <a-entity camera></a-entity>
+	    <canvas id="perspective" hidden></canvas>
 	</a-scene>
-	<canvas id="perspective" hidden></canvas>
+
 	<a id="download-link"></a>
 	<script>
 	    document.addEventListener('pointerup', (event) => { 
-	    	document.querySelector("video").pause();
 		let aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
 		let frame = captureVideoFrame("video", "png");
 		aScene = resizeCanvas(aScene, frame.width, frame.height);
@@ -64,7 +64,6 @@
 		    link.setAttribute("href", b64);
 		    link.click();
 		});
-		document.querySelector("video").play();
 	    });
 
 	    function resizeCanvas(origCanvas, width, height) {
