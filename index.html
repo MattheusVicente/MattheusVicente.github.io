@@ -80,9 +80,10 @@
   	<script>
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
+	    var elemento = document.getElementByClassName("button")
 
 	    let shareData;
-	    document.addEventListener('pointerup', (event) => {
+	    elemento.addEventListener('click', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
