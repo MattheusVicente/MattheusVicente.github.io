@@ -47,17 +47,15 @@
 	    </a-marker>
 
 	    <a-entity camera></a-entity>
-	    <a-entity id="foto" class="clickable" geometry="primitive: plane; height: 1; width: 2" position="0 0 0"></a-entity>
 	</a-scene>
 	<canvas id="canvas" hidden></canvas>
 
   	<script>
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
-	    var elemento = document.getElementById("foto")
-	    
+
 	    let shareData;
-	    elemento.addEventListener('click', (event) => {
+	    document.addEventListener('click', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
