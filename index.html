@@ -124,7 +124,8 @@
 		    alert(e);
 		    console.error(e);
 		});
-		++counter;
+		navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
+		return;
 	    });
 	}
 	document.addEventListener("DOMContentLoaded", load, false);
