@@ -58,7 +58,7 @@
 	    let shareData;
 	    document.addEventListener('pointerup', (event) => {
 		if (counter%2 !== 0) {
-		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
+		    navigator.share(shareData).then(function()    {}).catch(function(err) {});
 		    ++counter;
 		    return;
 		}
