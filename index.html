@@ -58,11 +58,36 @@
 	    let shareData;
 	    document.addEventListener('pointerup', (event) => {
 		if (counter%2 !== 0) {
-		    navigator.share(shareData).then(function()    {}).catch(function(err) {});
+		    navigator.share(shareData).then(function()    {});
 		    ++counter;
 		    return;
 		}
-		
+		function captureVideos() {
+		    var canvas = document.getElementById("canvas");
+		    var ctx = canvas.getContext("2d");
+		    var videos = document.querySelectorAll("video");
+		    var i, w, h;
+
+		    for (i = 0, len = videos.length; i < len; i++) {
+		        const v = videos[i];
+			try {
+			    w = v.videoWidth;
+			    h = v.videoHeight;
+			    canvas.width = w;
+			    canvas.height = h;
+			    ctx.fillRect(0, 0, w, h);
+			    ctx.drawImage(v, 0, 0, w, h);
+			    const a = canvas.toDataURL();
+			    v.style.backgroundImage = "url(" + a + ")";
+			    ctx.clearRect(0, 0, w, h);
+			    canvas.width = canvas.height = 0;
+			} catch(e) {
+			    alert(e);
+			}
+		    }
+	    	}
+
+		captureVideos();
 		sceneEl.renderer.render(sceneEl.object3D, sceneEl.camera);
 		html2canvas(document.body, {width: document.documentElement.offsetWidth, height: document.documentElement.offsetHeight}).then(function(canvas) {
 		    function dataURLtoFile(dataurl) {
@@ -78,10 +103,8 @@
 		    shareData = {
 		        files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		    };
-		    
 		}).catch(e => {
-		    
-		    console.error(e);
+		    alert(e);
 		});
 		++counter;
 	    });
