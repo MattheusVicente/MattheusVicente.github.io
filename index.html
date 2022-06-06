@@ -23,7 +23,7 @@
 
     <body style="margin: 0; overflow: hidden;">
 	<div>
-	    <button class="button1" onclick="printscreen()"><img class="icon" src="assets/camera.png"></button>
+	    <button class="button1"><img class="icon" src="assets/camera.png"></button>
 	</div>
 	<a-scene
             vr-mode-ui="enabled: false;"
@@ -66,11 +66,13 @@
   	<canvas id="canvas" hidden></canvas>
 
   	<script>
-	function printscreen() {
+
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
+	    var elemento = document.getElementByClassName('button1');
 
 	    let shareData;
+	    elemento.addEventListener('click', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
@@ -123,7 +125,8 @@
 		    console.error(e);
 		});
 		++counter;
-	};
+	    });
+
 	</script>
     </body>
 </html>
