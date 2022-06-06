@@ -48,7 +48,6 @@
 	    </a-marker>
 
 	    <a-entity camera></a-entity>
-	    <canvas id="perspective" hidden></canvas>
 	</a-scene>
 
 	<a id="download-link"></a>
@@ -88,7 +87,7 @@
 
 	    function captureVideoFrame(video, format, width, height) {
 		if (typeof video === 'string') {
-		    video = document.querySelector(video);
+		    video = document.querySelector("video");
 		}
 
 		format = format || 'jpeg';
@@ -115,7 +114,7 @@
 		}
 
 		var blob = new Blob([ arr ], { type: mimeType });
-		return { blob: blob, dataUri: dataUri, format: format, width: canvas.width, height: canvas.height };
+		return { blob: blob, dataUri: dataUri, format: format, width: canvas.width, height: canvas.height};
 	    }
 	</script>
     </body>
