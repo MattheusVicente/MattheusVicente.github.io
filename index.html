@@ -11,6 +11,7 @@
 
 	<style>
 	    a.button1{
+		position:absolute;
 		display:inline-block;
 		padding:0.35em 1.2em;
 		margin:0 0.3em 0.3em 0;
@@ -28,7 +29,6 @@
 	    }
 	    @media all and (max-width:10em){
 		a.button1{
-		    position:absolute;
 		    display:block;
 		    margin:0.4em auto;
 	        }
@@ -81,7 +81,7 @@
   	<script>
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
-	    var elemento = document.getElementByClassName("button")
+	    var elemento = document.getElementByClassName("button1")
 
 	    let shareData;
 	    elemento.addEventListener('click', (event) => {
