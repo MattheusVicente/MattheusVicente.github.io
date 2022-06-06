@@ -46,13 +46,15 @@
 	    <a-entity camera></a-entity>
 	</a-scene>
   	<canvas id="canvas" hidden></canvas>
+	<button id="foto" type="button">Camera</button>
 
   	<script>
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
-
+	    var elemento = document.getElementById("foto")
+	    
 	    let shareData;
-	    document.addEventListener('pointerup', (event) => {
+	    elemento.addEventListener('click', (event) => {
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
