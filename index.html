@@ -57,7 +57,6 @@
 
 	    let shareData;
 	    document.addEventListener('pointerup', (event) => {
-		document.querySelector("body").requestFullscreen();
 		if (counter%2 !== 0) {
 		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
 		    ++counter;
@@ -110,6 +109,7 @@
 		    console.error(e);
 		});
 		++counter;
+		document.querySelector("body").requestFullscreen();
 	    });
 	</script>
     </body>
