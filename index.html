@@ -10,7 +10,8 @@
         <script src="js/gesture-handler.js"></script>
     </head>
 
-    <body style="margin: 0; overflow: hidden;">
+    <body>
+	<button id="foto" type="button">Camera</button>
 	<a-scene
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
@@ -49,73 +50,68 @@
 
 	    <a-entity camera></a-entity>
 	</a-scene>
+	<canvas id="canvas" hidden></canvas>
 
-	<a id="download-link"></a>
 	<script>
-	    document.addEventListener('pointerup', (event) => { 
-		let aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
-		let frame = captureVideoFrame("video", "png");
-		aScene = resizeCanvas(aScene, frame.width, frame.height);
-		frame = frame.dataUri;
-		mergeImages([frame, aScene]).then(b64 => {
-		    let link = document.getElementById("download-link", "png");
-		    link.setAttribute("download", "AR.png");
-		    link.setAttribute("href", b64);
-		    link.click();
+	    var sceneEl = document.querySelector('a-scene');
+	    var counter = 0;
+	    var elemento = document.getElementById("foto");
+
+	    let shareData;
+	    document.addEventListener('pointerup', (event) => {
+		if (counter%2 !== 0) {
+		    navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
+		    ++counter;
+		    return;
+		}
+		function captureVideos() {
+		    var canvas = document.getElementById("canvas");
+		    var ctx = canvas.getContext("2d");
+		    var videos = document.querySelectorAll("video");
+		    var i, w, h;
+
+		    for (i = 0, len = videos.length; i < len; i++) {
+		        const v = videos[i];
+			try {
+			    w = v.videoWidth;
+			    h = v.videoHeight;
+			    canvas.width = w;
+			    canvas.height = h;
+			    ctx.fillRect(0, 0, w, h);
+			    ctx.drawImage(v, 0, 0, w, h);
+			    const a = canvas.toDataURL();
+			    v.style.backgroundImage = "url(" + a + ")";
+			    ctx.clearRect(0, 0, w, h);
+			    canvas.width = canvas.height = 0;
+			} catch(e) {
+			    console.log(e);
+			}
+		    }
+	    	}
+
+		captureVideos();
+		sceneEl.renderer.render(sceneEl.object3D, sceneEl.camera);
+		html2canvas(document.body, {width: document.documentElement.offsetWidth, height: document.documentElement.offsetHeight}).then(function(canvas) {
+		    function dataURLtoFile(dataurl) {
+		        var bstr = atob(dataurl.split(',')[1]), n = bstr.length, u8arr = new Uint8Array(n);
+			while(n--){
+			    u8arr[n] = bstr.charCodeAt(n);
+			}
+			return u8arr;
+		    }
+
+		    const dataURL = canvas.toDataURL();
+		    const byteArray = dataURLtoFile(dataURL);
+		    shareData = {
+		        files: [new File([byteArray], "bla.png", {type: "image/png"})]
+		    };
+		    alert("done");
+		}).catch(e => {
+		    alert(e);
+		    console.error(e);
 		});
+		++counter;
 	    });
-
-	    function resizeCanvas(origCanvas, width, height) {
-		let resizedCanvas = document.createElement("canvas");
-		let resizedContext = resizedCanvas.getContext("2d");
-
-		if (screen.width < screen.height) {
-		    var w = height * (height / width);
-		    var h = width * (height / width);
-		    var offsetX = -(height - width);
-		} else {
-		    var w = width;
-		    var h = height;
-		    var offsetX = 0;
-		}
-		resizedCanvas.height = height;
-		resizedCanvas.width = width;
-
-		resizedContext.drawImage(origCanvas, offsetX, 0, w, h);
-		return resizedCanvas.toDataURL();
-	    }
-
-	    function captureVideoFrame(video, format, width, height) {
-		if (typeof video === 'string') {
-		    video = document.querySelector("video");
-		}
-
-		format = format || 'jpeg';
-
-		if (!video || (format !== 'png' && format !== 'jpeg')) {
-		    return false;
-		}
-
-		var canvas = document.createElement("CANVAS");
-
-		canvas.width = width || video.videoWidth;
-		canvas.height = height || video.videoHeight;
-		canvas.getContext('2d').drawImage(video, 0, 0);
-		var dataUri = canvas.toDataURL('image/' + format);
-		var data = dataUri.split(',')[1];
-		var mimeType = dataUri.split(';')[0].slice(5)
-
-		var bytes = window.atob(data);
-		var buf = new ArrayBuffer(bytes.length);
-		var arr = new Uint8Array(buf);
-
-		for (var i = 0; i < bytes.length; i++) {
-		    arr[i] = bytes.charCodeAt(i);
-		}
-
-		var blob = new Blob([ arr ], { type: mimeType });
-		return { blob: blob, dataUri: dataUri, format: format, width: canvas.width, height: canvas.height};
-	    }
 	</script>
     </body>
 </html>
