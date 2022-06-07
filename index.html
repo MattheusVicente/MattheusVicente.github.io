@@ -14,7 +14,7 @@
 
     <body style="margin: 0; overflow: hidden;">
 	<div class="fixed-bottom d-flex justify-content-center">
-	    <img id="botao" class="btn border-0 w-50" src="assets/button-camera.png">
+	    <img id="screenshot" class="btn border-0 w-50" src="assets/button-camera.png">
 	</div>
 	<a-scene
             vr-mode-ui="enabled: false;"
@@ -58,10 +58,10 @@
 
   	<script>
 	    var sceneEl = document.querySelector('a-scene');
-	    var elemento = document.getElementById('botao');
+	    var el = document.getElementById('screenshot');
 	    var shareData;
 
-	    elemento.addEventListener('click', (event) => {
+	    el.addEventListener('click', (event) => {
 		function downloadImage() {
 		    navigator.share(shareData).then(function(){});
 		}
