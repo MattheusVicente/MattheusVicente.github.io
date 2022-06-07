@@ -15,16 +15,13 @@
 	        display:block;
 	        left:-60px;
 	        margin-top:35px;
-	        width:50%;
+	        width:100%;
 		background:none;
 	    }
 	</style>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
-	<div>
-	    <button id="btn" class="button1"><img class="icon" src="assets/camera.png"></button>
-	</div>
 	<a-scene
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
@@ -63,6 +60,9 @@
 
 	    <a-entity camera></a-entity>
 	</a-scene>
+	<div>
+	    <button id="btn" class="button1"><img class="icon" src="assets/camera.png"></button>
+	</div>
   	<canvas id="canvas" hidden></canvas>
 
   	<script>
