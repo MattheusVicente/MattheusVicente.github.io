@@ -57,7 +57,6 @@
   	<canvas id="canvas" hidden></canvas>
 
   	<script>
-	function load() {
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
 	    var elemento = document.getElementById('botao');
@@ -115,11 +114,7 @@
 		    alert(e);
 		    console.error(e);
 		});
-		navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
-		return;
 	    });
-	}
-	document.addEventListener("DOMContentLoaded", load, false);
 	</script>
     </body>
 </html>
