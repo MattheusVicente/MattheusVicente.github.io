@@ -105,6 +105,7 @@
 		        shareData = {
 		            files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		        };
+			alert("done");
 		    }).catch(e => {
 			alert(e);
 		        console.error(e);
@@ -113,7 +114,7 @@
 		}
 
 		shareData = printscreen();
-		navigator.share(shareData).then(function()    {}).catch(function(err));
+		navigator.share(shareData).then(function()    {});
 
 	    });
 	</script>
