@@ -61,7 +61,6 @@
 	    var counter = 0;
 	    var elemento = document.getElementById('botao');
 
-	    let shareData;
 	    elemento.addEventListener('click', (event) => {
 		function printscreen() {
 		    function captureVideos() {
@@ -102,18 +101,17 @@
 
 		        const dataURL = canvas.toDataURL();
 		        const byteArray = dataURLtoFile(dataURL);
-		        shareData = {
+		        let sharedata = {
 		            files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		        };
-			alert("done");
 		    }).catch(e => {
 			alert(e);
 		        console.error(e);
 		    });
-		    return shareData;
+		    return sharedata;
 		}
 
-		shareData = printscreen();
+		let shareData = printscreen();
 		navigator.share(shareData).then(function()    {});
 
 	    });
