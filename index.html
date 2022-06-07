@@ -62,10 +62,6 @@
 	    var shareData;
 
 	    el.addEventListener('click', (event) => {
-		function downloadImage() {
-		    navigator.share(shareData).then(function(){});
-		}
-
 		function captureVideos() {
 		    var canvas = document.getElementById("canvas");
 		    var ctx = canvas.getContext("2d");
@@ -105,7 +101,7 @@
 		    shareData = {
 		        files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		    };
-		    downloadImage();
+		    navigator.share(shareData).then(function(){});
 		});
 	    });
 	</script>
