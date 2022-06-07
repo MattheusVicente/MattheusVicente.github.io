@@ -64,7 +64,14 @@
 	    var shareData;
 	    elemento.addEventListener('click', (event) => {
 		function printscreen() {
-		    function captureVideos() {
+		    alert("navegador");
+		    navigator.share(shareData).then(function()    {});
+		}
+
+		
+		
+		    
+		function captureVideos() {
 		        var canvas = document.getElementById("canvas");
 		        var ctx = canvas.getContext("2d");
 		        var videos = document.querySelectorAll("video");
@@ -110,12 +117,7 @@
 			alert(e);
 		        console.error(e);
 		    });
-		}
-
-		printscreen();
-		alert("navegador");
-		navigator.share(shareData).then(function()    {});
-
+		    printscreen();
 	    });
 	</script>
     </body>
