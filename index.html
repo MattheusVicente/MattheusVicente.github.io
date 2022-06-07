@@ -24,7 +24,7 @@
 
     <body style="margin: 0; overflow: hidden;">
 	<div class="d-grid gap-2 col-6 mx-auto">
-	    <button type="button" id="botao" class="btn btn-sm text-nowrap "><img class="icon" src="assets/camera.png"></button>
+	    <button type="button" id="botao" class="btn btn-sm"><img class="img-fluid mx-auto d-block" src="assets/camera.png"></button>
 	</div>
 	<a-scene
             vr-mode-ui="enabled: false;"
@@ -70,7 +70,7 @@
 	function load() {
 	    var sceneEl = document.querySelector('a-scene');
 	    var counter = 0;
-	    var elemento = document.getElementById('btn');
+	    var elemento = document.getElementById('botao');
 
 	    let shareData;
 	    elemento.addEventListener('click', (event) => {
