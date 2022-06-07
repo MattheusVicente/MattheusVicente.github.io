@@ -64,17 +64,20 @@
 	    el.addEventListener('click', (event) => {
 		function captureVideos() {
 		    var canvas = document.getElementById("canvas");
+		    var ctx = canvas.getContext("2d");
 		    var videos = document.querySelectorAll("video");
 		    var i, w, h;
 		    for (i = 0, len = videos.length; i < len; i++) {
 		        const v = videos[i];
-			w = window.innerWidth;
-			h = window.innerHeight;
+			w = v.videoWidth;
+			h = v.videoHeight;
 			canvas.width = w;
 			canvas.height = h;
+			ctx.fillRect(0, 0, w, h);
+			ctx.drawImage(v, 0, 0, w, h);
 			const a = canvas.toDataURL();
 			v.style.backgroundImage = "url(" + a + ")";
-			canvas.width = canvas.height = 0;
+			ctx.clearRect(0, 0, w, h);
 		    }
 	    	}
 
