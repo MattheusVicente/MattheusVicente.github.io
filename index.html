@@ -84,7 +84,7 @@
 
 		captureVideos();
 		sceneEl.renderer.render(sceneEl.object3D, sceneEl.camera);
-		html2canvas(document.body, {width: document.documentElement.offsetWidth, height: document.documentElement.offsetHeight}).then(function(canvas) {
+		html2canvas(document.body).then(function(canvas) {
 		    function dataURLtoFile(dataurl) {
 		        var bstr = atob(dataurl.split(',')[1]), n = bstr.length, u8arr = new Uint8Array(n);
 			while(n--) {
