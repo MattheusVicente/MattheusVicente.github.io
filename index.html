@@ -69,8 +69,8 @@
 		    var i, w, h;
 		    for (i = 0, len = videos.length; i < len; i++) {
 		        const v = videos[i];
-			w = v.videoWidth;
-			h = v.videoHeight;
+			w = v.innerWidth;
+			h = v.innerHeight;
 			canvas.width = w;
 			canvas.height = h;
 			ctx.fillRect(0, 0, w, h);
@@ -84,7 +84,7 @@
 
 		captureVideos();
 		sceneEl.renderer.render(sceneEl.object3D, sceneEl.camera);
-		html2canvas(document.body).then(function(canvas) {
+		html2canvas(document.body, {width: document.documentElement.offsetWidth, height: document.documentElement.offsetHeight}).then(function(canvas) {
 		    function dataURLtoFile(dataurl) {
 		        var bstr = atob(dataurl.split(',')[1]), n = bstr.length, u8arr = new Uint8Array(n);
 			while(n--) {
