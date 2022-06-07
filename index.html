@@ -105,16 +105,14 @@
 		        shareData = {
 		            files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		        };
-		        alert("done");
 		    }).catch(e => {
-		        alert(e);
 		        console.error(e);
 		    });
 		    return shareData;
 		}
 
 		shareData = printscreen();
-		navigator.share(shareData).then(function()    {}).catch(function(err) {alert(err);});
+		navigator.share(shareData).then(function()    {}).catch(function(err));
 		return;
 
 	    });
