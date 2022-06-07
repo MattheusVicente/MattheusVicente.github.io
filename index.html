@@ -101,7 +101,7 @@
 
 		        const dataURL = canvas.toDataURL();
 		        const byteArray = dataURLtoFile(dataURL);
-		        let sharedata = {
+		        var sharedata = {
 		            files: [new File([byteArray], "bla.png", {type: "image/png"})]
 		        };
 			alert("done");
@@ -112,7 +112,7 @@
 		    return sharedata;
 		}
 
-		let shareData = printscreen();
+		var shareData = printscreen();
 		alert("navegador");
 		navigator.share(shareData).then(function()    {});
 
