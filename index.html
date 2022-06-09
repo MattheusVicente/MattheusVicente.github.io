@@ -83,21 +83,15 @@
 			return resizedCanvas.toDataURL();
 		    }
 
-		    function captureVideoFrame(video, format, width, height) {
+		    function captureVideoFrame(video, format) {
 			if (typeof video === 'string') {
 			    video = document.querySelector(video);
 			}
 
-			format = format || 'jpeg';
-
-			if (!video || (format !== 'png' && format !== 'jpeg')) {
-			    return false;
-			}
-
 			var canvas = document.getElementById("canvas");
 
-			canvas.width = width || video.videoWidth;
-			canvas.height = height || video.videoHeight;
+			canvas.width = video.videoWidth;
+			canvas.height = video.videoHeight;
 			canvas.getContext('2d').drawImage(video, 0, 0);
 			var dataUri = canvas.toDataURL('image/' + format);
 			var data = dataUri.split(',')[1];
