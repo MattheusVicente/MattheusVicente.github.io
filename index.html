@@ -128,7 +128,10 @@
 		aScene = resizeCanvas(aScene, frame.width, frame.height);
 		frame = frame.dataUri;
 		mergeImages([frame, aScene]).then(b64 => {
-			navigator.share(b64).then(function()    {})
+		    let link = document.getElementById("download-link");
+		    link.setAttribute("download", "AR.png");
+		    link.setAttribute("href", b64);
+		    link.click();
 		});
 		document.querySelector("video").play(); 
 	    });
