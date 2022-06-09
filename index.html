@@ -83,7 +83,7 @@
 			return resizedCanvas.toDataURL();
 		    }
 
-		    function captureVideoFrame(video, format) {
+		    function captureVideoFrame(video, format, width, height) {
 			if (typeof video === 'string') {
 			    video = document.querySelector(video);
 			}
@@ -116,7 +116,7 @@
 		   }
 
 		document.querySelector("video").pause();
-		let aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
+		let aScene = document.querySelector("a-scene");
 		let frame = captureVideoFrame("video", "png");
 		aScene = resizeCanvas(aScene, frame.width, frame.height);
 		frame = frame.dataUri;
