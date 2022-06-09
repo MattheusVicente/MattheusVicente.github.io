@@ -88,7 +88,7 @@
 			return resizedCanvas.toDataURL();
 		    }
 
-		    function captureVideoFrame(video, format) {
+		    function captureVideoFrame(video, format, width, height) {
 			if (typeof video === 'string')
 			{
 			    video = document.querySelector(video);
