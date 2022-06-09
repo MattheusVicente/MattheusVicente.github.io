@@ -14,6 +14,7 @@
     </head>
 
     <body style="margin: 0; overflow: hidden;">
+	<canvas id="canvas" hidden></canvas>
 	<a id="download-link">
 	<div class="fixed-bottom d-flex justify-content-center">
 	    <img id="screenshot" class="btn border-0 w-25" src="assets/button-camera.png">
@@ -65,7 +66,7 @@
 	    el.addEventListener('click', (event) => {
 		   function resizeCanvas(origCanvas, width, height)
 		    {
-			let resizedCanvas = document.createElement("canvas");
+			let resizedCanvas = document.getElementById("canvas");
 			let resizedContext = resizedCanvas.getContext("2d");
 
 			if (screen.width < screen.height)
@@ -100,7 +101,7 @@
 			    return false;
 			}
 
-			var canvas = document.createElement("CANVAS");
+			var canvas = document.getElementById("canvas");
 
 			canvas.width = width || video.videoWidth;
 			canvas.height = height || video.videoHeight;
