@@ -75,12 +75,12 @@
 			canvas.height = height;
 			w = height * (height / width);
             		h = width * (height / width);
-			var offsetX = (h - w);
-			ctx.fillRect(0, offsetX, w, h);
-			ctx.drawImage(v, 0, offsetX, w, h);
+			var offsetX = - (h - w);
+			ctx.fillRect(offsetX, 0, w, h);
+			ctx.drawImage(v, offsetX, 0, w, h);
 			const a = canvas.toDataURL();
 			v.style.backgroundImage = "url(" + a + ")";
-			ctx.clearRect(0, offsetX, w, h);
+			ctx.clearRect(offsetX, 0, w, h);
 			canvas.width = 0;
 			canvas.height = 0;
 		    }
