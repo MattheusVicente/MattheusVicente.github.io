@@ -66,21 +66,21 @@
 		    var canvas = document.getElementById("canvas");
 		    var ctx = canvas.getContext("2d");
 		    var videos = document.querySelectorAll("video");
-		    var i, w, h;
+		    var i, w, h, offsetX, width, height;
 		    for (i = 0, len = videos.length; i < len; i++) {
 		        const v = videos[i];
-			var width = v.videoWidth;
-			var height = v.videoHeight;
+			width = v.videoWidth;
+			height = v.videoHeight;
 			canvas.width = width;
 			canvas.height = height;
 			w = height * (height / width);
             		h = width * (height / width);
-			var offsetX = - (h - w);
-			ctx.fillRect(offsetX, 0, w, h);
-			ctx.drawImage(v, offsetX, 0, w, h);
+			offsetX = - (h - w);
+			ctx.fillRect(0, offsetX, w, h);
+			ctx.drawImage(v, 0, offsetX, w, h);
 			const a = canvas.toDataURL();
 			v.style.backgroundImage = "url(" + a + ")";
-			ctx.clearRect(offsetX, 0, w, h);
+			ctx.clearRect(0, offsetX, w, h);
 			canvas.width = 0;
 			canvas.height = 0;
 		    }
