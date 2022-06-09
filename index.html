@@ -73,7 +73,7 @@
 			h = v.videoHeight;
 			canvas.width = w;
 			canvas.height = h;
-			var offsetX = -(h - w);
+			var offsetX = (h - w);
 			ctx.fillRect(0, offsetX, w, h);
 			ctx.drawImage(v, 0, offsetX, w, h);
 			const a = canvas.toDataURL();
