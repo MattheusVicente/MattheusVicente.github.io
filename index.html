@@ -95,7 +95,7 @@
 			h = video.videoHeight;
 			canvas.width = w;
 			canvas.height = h;
-			canvas.getContext('2d').drawImage(video, 0, 0, w, h);
+			canvas.getContext('2d').drawImage(video, 0, 0);
 			var dataUri = canvas.toDataURL('image/' + format);
 			var data = dataUri.split(',')[1];
 			var mimeType = dataUri.split(';')[0].slice(5)
