@@ -69,10 +69,12 @@
 		    var i, w, h;
 		    for (i = 0, len = videos.length; i < len; i++) {
 		        const v = videos[i];
-			w = v.videoWidth;
-			h = v.videoHeight;
-			canvas.width = w;
-			canvas.height = h;
+			var width = v.videoWidth;
+			var height = v.videoHeight;
+			canvas.width = width;
+			canvas.height = height;
+			w = height * (height / width);
+            		h = width * (height / width);
 			var offsetX = (h - w);
 			ctx.fillRect(0, offsetX, w, h);
 			ctx.drawImage(v, 0, offsetX, w, h);
