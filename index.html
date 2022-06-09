@@ -74,11 +74,11 @@
 			canvas.width = w;
 			canvas.height = h;
 			var offsetX = -(h - w);
-			ctx.fillRect(0, 0, w, h);
+			ctx.fillRect(0, offsetX, w, h);
 			ctx.drawImage(v, 0, offsetX, w, h);
 			const a = canvas.toDataURL();
 			v.style.backgroundImage = "url(" + a + ")";
-			ctx.clearRect(0, 0, w, h);
+			ctx.clearRect(0, offsetX, w, h);
 			canvas.width = 0;
 			canvas.height = 0;
 		    }
