@@ -90,9 +90,11 @@
 
 			var canvas = document.getElementById("canvas");
 
-			canvas.width = video.videoWidth;
-			canvas.height = video.videoHeight;
-			canvas.getContext('2d').drawImage(video, 0, 0);
+			w = video.videoWidth;
+			h = video.videoHeight;
+			canvas.width = w;
+			canvas.height = h;
+			canvas.getContext('2d').drawImage(video, 0, 0, w, h);
 			var dataUri = canvas.toDataURL('image/' + format);
 			var data = dataUri.split(',')[1];
 			var mimeType = dataUri.split(';')[0].slice(5)
