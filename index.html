@@ -73,8 +73,9 @@
 			h = v.videoHeight;
 			canvas.width = w;
 			canvas.height = h;
+			var offsetX = -(h - w);
 			ctx.fillRect(0, 0, w, h);
-			ctx.drawImage(v, 0, 0, w, h);
+			ctx.drawImage(v, offsetX, 0, w, h);
 			const a = canvas.toDataURL();
 			v.style.backgroundImage = "url(" + a + ")";
 			ctx.clearRect(0, 0, w, h);
@@ -85,7 +86,7 @@
 
 		captureVideos();
 		sceneEl.renderer.render(sceneEl.object3D, sceneEl.camera);
-		html2canvas(document.body).then(function(canvas) {
+		html2canvas(document.body, {width: document.documentElement.offsetWidth, height: document.documentElement.offsetHeight}).then(function(canvas) {
 		    function dataURLtoFile(dataurl) {
 		        var bstr = atob(dataurl.split(',')[1]), n = bstr.length, u8arr = new Uint8Array(n);
 			while(n--) {
