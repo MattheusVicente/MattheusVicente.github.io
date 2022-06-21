@@ -1,122 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-        <script src="js/aframe-extras.loaders.min.js"></script>
-        <script src="js/gesture-detector.js"></script>
-        <script src="js/gesture-handler.js"></script>
-	<script src="https://unpkg.com/merge-images"></script>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/aframe-master.min.js"></script>
+    <script src="js/aframe-ar-nft.js"></script>
+    <script src="js/gesture-detector.js"></script>
+    <script src="js/gesture-handler.js"></script>
+    <script src="js/merge-images.js"></script>
+  </head>
 
-    <body style="margin: 0; overflow: hidden;">
-	<a id="download-link">
-	<div class="fixed-bottom d-flex justify-content-center">
-	    <img id="screenshot" class="btn border-0 w-25" src="assets/button-camera.png">
-	</div>
-	<a-scene
-            vr-mode-ui="enabled: false;"
-            loading-screen="enabled: false;"
-            renderer="logarithmicDepthBuffer: true;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-            id="scene"
-            embedded
-            gesture-detector>
+  <body style="margin: 0; overflow: hidden">
+    <a id="download-link"/>
+    <div class="fixed-bottom d-flex justify-content-center">
+      <img
+        id="screenshot"
+        class="btn border-0 w-25"
+        src="assets/button-camera.png">
+    </div>
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      embedded
+      gesture-detector>
 
-	    <a-assets>
-		<a-asset-item
-		    id="animated-asset"
-		    src="assets/scene.gltf"></a-asset-item>
-	    </a-assets>
+      <a-assets>
+        <a-asset-item
+          id="animated-asset"
+          src="assets/scene.gltf">
+        </a-asset-item>
+      </a-assets>
 
-	    <a-marker
-	        id="animated-marker"
-		type="pattern"
-		preset="custom"
-		url="assets/marker.patt"
-		raycaster="objects: .clickable"
-		emitevents="true"
-		cursor="fuse: false; rayOrigin: mouse;"
-		id="markerA">
+      <a-marker
+        type="pattern"
+        preset="custom"
+        url="assets/marker.patt"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;">
+        <a-entity
+          scale="0.5 0.5 0.5"
+          gltf-model="#animated-asset"
+          class="clickable"
+          rotation="210 0 0"
+          gesture-handler>
+        </a-entity>
+      </a-marker>
 
-		<a-entity
-		    id="bowser-model"
-		    scale="0.5 0.5 0.5"
-		    animation-mixer="loop: repeat"
-		    gltf-model="#animated-asset"
-		    class="clickable"
-		    rotation="210 0 0"
-		    gesture-handler></a-entity>
+      <a-entity camera></a-entity>
 
-	    </a-marker>
+    </a-scene>
 
-	    <a-entity camera></a-entity>
-	</a-scene>
+    <script>
+      var el = document.getElementById("screenshot");
 
-  	<script>
-	    var el = document.getElementById('screenshot');
+      el.addEventListener("click", (event) => {
+        function resizeCanvas(origCanvas, width, height) {
+          let resizedCanvas = document.createElement("canvas");
+          let resizedContext = resizedCanvas.getContext("2d");
+          if (screen.width < screen.height) {
+            var w = height * (height / width);
+            var h = width * (height / width);
+            var offsetX = -(height - width);
+          }
+          else {
+            var w = width;
+            var h = height;
+            var offsetX = 0;
+          }
+          resizedCanvas.height = height;
+          resizedCanvas.width = width;
+          resizedContext.drawImage(origCanvas, offsetX, 0, w, h);
+          return resizedCanvas.toDataURL();
+        }
 
-	    el.addEventListener('click', (event) => {
-	        function resizeCanvas(origCanvas, width, height) {
-		    let resizedCanvas = document.createElement("canvas");
-		    let resizedContext = resizedCanvas.getContext("2d");
-		    if (screen.width < screen.height) {
-			var w = height * (height / width);
-			var h = width * (height / width);
-			var offsetX = -(height - width);
-		    } else {
-			var w = width;
-			var h = height;
-			var offsetX = 0;
-		    }
-		    resizedCanvas.height = height;
-		    resizedCanvas.width = width;
-		    resizedContext.drawImage(origCanvas, offsetX, 0, w, h);
-		    return resizedCanvas.toDataURL();
-		}
+        function captureVideoFrame(video, format, width, height) {
+          if (typeof video === "string") {
+            video = document.querySelector(video);
+          }
+          format = format || "jpeg";
+          if (!video || (format !== "png" && format !== "jpeg")) {
+            return false;
+          }
+          var canvas = document.createElement("CANVAS");
+          canvas.width = width || video.videoWidth;
+          canvas.height = height || video.videoHeight;
+          canvas.getContext("2d").drawImage(video, 0, 0);
+          var dataUri = canvas.toDataURL("image/" + format);
+          var data = dataUri.split(",")[1];
+          var mimeType = dataUri.split(";")[0].slice(5);
+          var bytes = window.atob(data);
+          var buf = new ArrayBuffer(bytes.length);
+          var arr = new Uint8Array(buf);
+          for (var i = 0; i < bytes.length; i++) {
+            arr[i] = bytes.charCodeAt(i);
+          }
+          var blob = new Blob([arr], { type: mimeType });
+          return {
+            blob: blob,
+            dataUri: dataUri,
+            format: format,
+            width: canvas.width,
+            height: canvas.height,
+          };
+        }
 
-		function captureVideoFrame(video, format, width, height) {
-		    if (typeof video === 'string') {
-			video = document.querySelector(video);
-		    }
-		    format = format || 'jpeg';
-		    if (!video || (format !== 'png' && format !== 'jpeg')) {
-			return false;
-		    }
-		    var canvas = document.createElement("CANVAS");
-		    canvas.width = width || video.videoWidth;
-		    canvas.height = height || video.videoHeight;
-		    canvas.getContext('2d').drawImage(video, 0, 0);
-		    var dataUri = canvas.toDataURL('image/' + format);
-		    var data = dataUri.split(',')[1];
-		    var mimeType = dataUri.split(';')[0].slice(5)
-		    var bytes = window.atob(data);
-		    var buf = new ArrayBuffer(bytes.length);
-		    var arr = new Uint8Array(buf);
-		    for (var i = 0; i < bytes.length; i++) {
-			arr[i] = bytes.charCodeAt(i);
-		    }
-		    var blob = new Blob([ arr ], { type: mimeType });
-		    return { blob: blob, dataUri: dataUri, format: format, width: canvas.width, height: canvas.height };
-		}
-
-		document.querySelector("video").pause();
-		let aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");;
-		let frame = captureVideoFrame("video", "png");
-		aScene = resizeCanvas(aScene, frame.width, frame.height);
-		frame = frame.dataUri;
-		mergeImages([frame, aScene]).then(b64 => {
-		    let link = document.getElementById("download-link");
-		    link.setAttribute("download", "AR.png");
-		    link.setAttribute("href", b64);
-		    link.click();
-		});
-		document.querySelector("video").play(); 
-	    });
-	</script>
-    </body>
+        document.querySelector("video").pause();
+        let aScene = document
+          .querySelector("a-scene")
+          .components.screenshot.getCanvas("perspective");
+        let frame = captureVideoFrame("video", "png");
+        aScene = resizeCanvas(aScene, frame.width, frame.height);
+        frame = frame.dataUri;
+        mergeImages([frame, aScene]).then((b64) => {
+          let link = document.getElementById("download-link");
+          link.setAttribute("download", "AR.png");
+          link.setAttribute("href", b64);
+          link.click();
+        });
+        document.querySelector("video").play();
+      });
+    </script>
+  </body>
 </html>
